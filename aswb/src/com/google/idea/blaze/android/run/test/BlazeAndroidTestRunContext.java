@@ -27,7 +27,7 @@ import com.android.tools.idea.run.LaunchOptions;
 import com.android.tools.idea.run.editor.AndroidDebugger;
 import com.android.tools.idea.run.editor.AndroidDebuggerState;
 import com.android.tools.idea.run.tasks.DebugConnectorTask;
-import com.android.tools.idea.run.tasks.DeployTask;
+import com.android.tools.idea.run.tasks.DeployTasksCompat;
 import com.android.tools.idea.run.tasks.LaunchTask;
 import com.android.tools.idea.run.tasks.LaunchTasksProvider;
 import com.android.tools.idea.run.util.ProcessHandlerLaunchStatus;
@@ -167,7 +167,7 @@ class BlazeAndroidTestRunContext implements BlazeAndroidRunContext {
         ImmutableMap<String, List<File>> filesToInstall =
             getFilesToInstall(device, launchOptions, apkProvider);
         return ImmutableList.of(
-            new DeployTask(project, filesToInstall, launchOptions.getPmInstallOptions()));
+            DeployTasksCompat.createDeployTask(project, filesToInstall, launchOptions));
       case MOBILE_INSTALL:
         return ImmutableList.of();
     }
